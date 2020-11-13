@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from fale_mais import FaleMais
-from funcoes import completa_codigo_de_area
+from talk_more import TalkMore
+from function import fill_area_code
 app = Flask(__name__)
 
 
@@ -11,13 +11,13 @@ def index():
 
 @app.route('/resultado', methods=['POST',])
 def resultado():
-    origem = completa_codigo_de_area(request.form['origem'])
-    destino = completa_codigo_de_area(request.form['destino'])
-    duracao = request.form['tempo']
-    plano = request.form['select']
-    fale_mais = FaleMais(origem, destino, float(duracao), plano)
+    origin = fill_area_code(request.form['origem'])
+    destination = fill_area_code(request.form['destino'])
+    length = request.form['tempo']
+    plan = request.form['select']
+    talk_more = TalkMore(origin, destination, float(length), plan)
 
-    return render_template('resultado.html', titulo='FaleMais', fale_mais=fale_mais)
+    return render_template('resultado.html', titulo='FaleMais', fale_mais=talk_more)
 
 
 app.run(debug=True)
