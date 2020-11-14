@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from talk_more import TalkMore
-from function import fill_area_code
+from function import fill_area_code, correct_lenght
 app = Flask(__name__)
 
 
@@ -13,7 +13,7 @@ def index():
 def resultado():
     origin = fill_area_code(request.form['origem'])
     destination = fill_area_code(request.form['destino'])
-    length = request.form['tempo']
+    length = correct_lenght(request.form['tempo'])
     plan = request.form['select']
     talk_more = TalkMore(origin, destination, float(length), plan)
 
